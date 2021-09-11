@@ -5,7 +5,7 @@ async function parallel() {
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
     faceapi.nets.faceExpressionNet.loadFromUri('/models')
-  ]).then(startVideo);
+  ]).then(startVideo).catch(e => console.error(e));
 }
 parallel();
 
@@ -17,7 +17,7 @@ function startVideo() {
   )
 }
 
-video.addEventListener('play', () => {
+video.addEventListener('playing', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
   const displaySize = { width: video.width, height: video.height }
